@@ -112,8 +112,11 @@ namespace WindowsFormsApp8
         }
         private void X_Button_Click(object sender, EventArgs e)
         {
-            if (thread.ThreadState == System.Threading.ThreadState.Running)
-                this.thread.Abort();
+            try
+            {
+                thread.Abort();
+            }
+            catch (Exception) { }
             Close();
         }
 
@@ -129,6 +132,7 @@ namespace WindowsFormsApp8
                 });
                 thread.SetApartmentState(ApartmentState.STA);
                 thread.Start();
+                //thread.Join();
             }
             else
                 MessageBox.Show("Текст пуст");
